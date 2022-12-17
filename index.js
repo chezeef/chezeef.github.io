@@ -111,3 +111,4 @@ window.addEventListener('keyup', (event) => {
 
 })
 
+console.log("you are on index tutorial ver");
