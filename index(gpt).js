@@ -63,7 +63,7 @@ const enemy = new Sprite({
 const keys = {
     a: {
         pressed: false
-    }
+    },
     d: { 
         pressed: false 
     }
