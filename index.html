@@ -1,2 +1,149 @@
-<canvas></canvas>
-<script src ="index(gpt).js"></script>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Hey — I really like velocity</title>
+  <style>
+    :root{
+      --bg1: #0f172a;
+      --bg2: #0b1220;
+      --accent: #7dd3fc;
+      --muted: #94a3b8;
+      --card: rgba(255,255,255,0.04);
+    }
+
+    html,body{
+      height:100%;
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg,var(--bg1),var(--bg2));
+      color: #e6eef8;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    .wrap{
+      min-height:100%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:2rem;
+      box-sizing:border-box;
+    }
+
+    .card{
+      background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:16px;
+      padding:2rem 2.5rem;
+      box-shadow: 0 10px 30px rgba(2,6,23,0.6);
+      max-width:760px;
+      width:100%;
+      text-align:center;
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(125,211,252,0.08);
+    }
+
+    h1{
+      margin:0 0 0.5rem 0;
+      font-size:clamp(1.4rem, 2.8vw, 2.4rem);
+      line-height:1.05;
+      letter-spacing:-0.02em;
+    }
+
+    p.lead{
+      margin:0 0 1.25rem 0;
+      color:var(--muted);
+      font-size:1rem;
+    }
+
+    .velocity{
+      display:inline-block;
+      font-weight:700;
+      color:var(--accent);
+      padding:0.15rem 0.35rem;
+      border-radius:0.45rem;
+      transform-origin:50% 50%;
+      /* subtle motion to hint 'velocity' */
+      animation: slide-bounce 900ms ease-in-out infinite alternate;
+    }
+
+    @keyframes slide-bounce{
+      from{ transform: translateX(0) translateY(0) scale(1); filter: drop-shadow(0 6px 12px rgba(0,0,0,0.45)); }
+      to  { transform: translateX(10px) translateY(-3px) scale(1.02); filter: drop-shadow(0 16px 28px rgba(0,0,0,0.55)); }
+    }
+
+    .meta{
+      margin-top:1rem;
+      font-size:0.85rem;
+      color:var(--muted);
+    }
+
+    .btn{
+      appearance:none;
+      border:0;
+      background:transparent;
+      color:var(--accent);
+      cursor:pointer;
+      font-weight:600;
+      padding:0.4rem 0.6rem;
+      border-radius:0.45rem;
+      margin-left:0.5rem;
+    }
+
+    .sr-only { /* accessibility helper */
+      position: absolute !important;
+      height: 1px; width: 1px;
+      overflow: hidden;
+      clip: rect(1px, 1px, 1px, 1px);
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <main class="card" role="main" aria-labelledby="headline">
+      <h1 id="headline">hey, i really like <span class="velocity" id="velocityWord">velocity</span></h1>
+      <p class="lead">A little motion for a word that means motion — try pausing or resuming the animation below.</p>
+
+      <div class="meta">
+        <button class="btn" id="toggleBtn" aria-pressed="false">Pause motion</button>
+        <span class="sr-only" id="status" aria-live="polite">Animation playing</span>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // Small accessible control to pause/resume the animation.
+    (function(){
+      const btn = document.getElementById('toggleBtn');
+      const word = document.getElementById('velocityWord');
+      const status = document.getElementById('status');
+      let running = true;
+
+      btn.addEventListener('click', () => {
+        running = !running;
+        if(running){
+          word.style.animationPlayState = 'running';
+          btn.textContent = 'Pause motion';
+          btn.setAttribute('aria-pressed','false');
+          status.textContent = 'Animation playing';
+        } else {
+          word.style.animationPlayState = 'paused';
+          btn.textContent = 'Resume motion';
+          btn.setAttribute('aria-pressed','true');
+          status.textContent = 'Animation paused';
+        }
+      });
+
+      // Respect user preference for reduced motion
+      const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+      if(mq.matches){
+        word.style.animation = 'none';
+        btn.style.display = 'none';
+        status.textContent = 'Reduced motion preference enabled — animation disabled';
+      }
+    })();
+  </script>
+</body>
+</html>
