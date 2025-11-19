@@ -84,6 +84,61 @@
             color: #6b6b6b;
             max-width: 600px;
             font-style: italic;
+            margin-bottom: 3rem;
+        }
+        
+        /* Ticker Slider */
+        .ticker-container {
+            width: 100%;
+            overflow: hidden;
+            background-color: rgba(255, 255, 255, 0.5);
+            padding: 1rem 0;
+        }
+        
+        .ticker {
+            display: flex;
+            animation: scroll 20s linear infinite;
+            width: fit-content;
+        }
+        
+        .ticker-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0 2rem;
+            white-space: nowrap;
+            font-size: 1.1rem;
+            color: #3a3a3a;
+        }
+        
+        .ticker-item img {
+            height: 60px;
+            width: auto;
+            object-fit: contain;
+        }
+        
+        .ticker-placeholder {
+            height: 60px;
+            width: 80px;
+            background: linear-gradient(135deg, #e8dcc4 0%, #d4c5a9 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            color: #8b7355;
+        }
+        
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+        
+        .ticker:hover {
+            animation-play-state: paused;
         }
         
         /* Section Styling */
@@ -226,6 +281,19 @@
             .portfolio-grid {
                 grid-template-columns: 1fr;
             }
+            
+            .slide {
+                height: 200px;
+            }
+            
+            .ticker-item {
+                font-size: 0.9rem;
+            }
+            
+            .ticker-placeholder {
+                height: 50px;
+                width: 70px;
+            }
         }
     </style>
 </head>
@@ -245,6 +313,53 @@
         <h1>stuff</h1>
         <p>random 'projects'</p>
     </section>
+    
+    <!-- Ticker Slider -->
+    <div class="ticker-container">
+        <div class="ticker">
+            <div class="ticker-item">
+                <div class="ticker-placeholder">img 1</div>
+                <span>Project Alpha</span>
+            </div>
+            <div class="ticker-item">
+                <div class="ticker-placeholder">img 2</div>
+                <span>Design Beta</span>
+            </div>
+            <div class="ticker-item">
+                <div class="ticker-placeholder">img 3</div>
+                <span>Creative Gamma</span>
+            </div>
+            <div class="ticker-item">
+                <div class="ticker-placeholder">img 4</div>
+                <span>Art Delta</span>
+            </div>
+            <div class="ticker-item">
+                <div class="ticker-placeholder">img 5</div>
+                <span>Build Epsilon</span>
+            </div>
+            <!-- Duplicate for seamless loop -->
+            <div class="ticker-item">
+                <div class="ticker-placeholder">img 1</div>
+                <span>Project Alpha</span>
+            </div>
+            <div class="ticker-item">
+                <div class="ticker-placeholder">img 2</div>
+                <span>Design Beta</span>
+            </div>
+            <div class="ticker-item">
+                <div class="ticker-placeholder">img 3</div>
+                <span>Creative Gamma</span>
+            </div>
+            <div class="ticker-item">
+                <div class="ticker-placeholder">img 4</div>
+                <span>Art Delta</span>
+            </div>
+            <div class="ticker-item">
+                <div class="ticker-placeholder">img 5</div>
+                <span>Build Epsilon</span>
+            </div>
+        </div>
+    </div>
 
     <!-- Portfolio Section -->
     <section id="work">
@@ -287,7 +402,7 @@
         <div class="contact-content">
             <p>if you have anything to say... -comments, questions, or concerns-</p>
             <div class="contact-links">
-                <a href="psnchels@yahoo.com">email</a>
+                <a href="mailto:psnchels@yahoo.com">email</a>
                 <a href="https://instagram.com/realCheezd" target="_blank">insta</a>
             </div>
         </div>
